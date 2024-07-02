@@ -1,0 +1,8 @@
+- List three Linux Distributions.
+1) ubuntu 2) fedora  3) debian
+
+- From the slides what is the man command used for?
+provide short reference manuals for individual command , API function , concepts, config file syntaxand is organized in sections
+
+
+
