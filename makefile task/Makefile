@@ -13,6 +13,8 @@ TARGET = $(BUILD_DIR)/app
 DIRS = $(BIN_DIR) $(BUILD_DIR)
 
 # Create directories using foreach
+#mkdir -p  --> creste intermediate folder 
+#$(foreach var, list, text)
 $(foreach dir, $(DIRS), $(shell mkdir -p $(dir)))
 
 # Rules
