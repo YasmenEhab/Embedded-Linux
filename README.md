@@ -68,6 +68,21 @@ OLDPWD=/home/yasmen/Desktop
 echo $SHELL
 /bin/bash
 
+4- Execute the following command :
+echo \ then press enter
+What is the purpose of \ ?
+
+This means that the shell will not immediately execute the command after the backslash; instead, it waits for further input. 
+
+
+5- Create a Bash shell alias named PrintPath for the “echo $PATH” command
+nano ~/.bashrc
+alias PrintPath='echo $PATH'
+source ~/.bashrc
+PrintPath
+
+
+
 
 
 4- 
