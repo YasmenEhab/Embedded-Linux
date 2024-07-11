@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check if the source directory is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <source_directory>"
+  exit 1
+fi
+
+# Get the source directory from the argument
+SOURCE_DIR="$1"
+
+# Check if the source directory exists
+if [ ! -d "$SOURCE_DIR" ]; then
+  echo "Error: Source directory '$SOURCE_DIR' does not exist."
+  exit 1
+fi
+
+# Define subdirectories
+IMAGES_DIR="$SOURCE_DIR/images"
+DOCUMENTS_DIR="$SOURCE_DIR/documents"
+OTHERS_DIR="$SOURCE_DIR/others"
+
+# Create subdirectories if they do not exist
+mkdir -p "$IMAGES_DIR"
+mkdir -p "$DOCUMENTS_DIR"
+mkdir -p "$OTHERS_DIR"
+
+# Move files to appropriate subdirectories
+for FILE in "$SOURCE_DIR"/*; do
+  if [ -f "$FILE" ]; then
+    EXTENSION="${FILE##*.}"
+    case "$EXTENSION" in
+      jpg|png|gif)
+        mv "$FILE" "$IMAGES_DIR/"
+        ;;
+      txt|doc|pdf)
+        mv "$FILE" "$DOCUMENTS_DIR/"
+        ;;
+      *)
+        mv "$FILE" "$OTHERS_DIR/"
+        ;;
+    esac
+  fi
+done
+
+echo "Files have been organized into subdirectories."
