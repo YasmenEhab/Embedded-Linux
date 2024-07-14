@@ -3,7 +3,7 @@
 
 class Calculator {
 private:
-    // Private member functions for the operations
+    
     double add(double a, double b) {
         return a + b;
     }
@@ -37,7 +37,7 @@ private:
     }
 
 public:
-    // Public function to interface with the user
+   
     void calculate() {
         double num1, num2, result;
         char operation;
