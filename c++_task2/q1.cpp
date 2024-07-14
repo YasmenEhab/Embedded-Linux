@@ -8,11 +8,10 @@ private:
     int year;
 
 public:
-    // Constructor
+
     Car(const std::string &comp,int mod, int yr) 
         : company(comp), model(mod), year(yr) {}
 
-    // Getters
     std::string getCompany() const {
         return company;
     }
@@ -25,7 +24,7 @@ public:
         return year;
     }
 
-    // Setters
+
     void setCompany(const std::string &comp) {
         company = comp;
     }
@@ -40,21 +39,20 @@ public:
 };
 
 int main() {
-    // Create a Car object
+  
     Car myCar("Toyota", 3421, 2020);
 
-    // Print the initial values
+  
     std::cout << "Initial values:\n";
     std::cout << "Company: " << myCar.getCompany() << "\n";
     std::cout << "Model: " << myCar.getModel() << "\n";
     std::cout << "Year: " << myCar.getYear() << "\n";
 
-    // Modify the values
     myCar.setCompany("Honda");
     myCar.setModel(1234);
     myCar.setYear(2022);
 
-    // Print the modified values
+    
     std::cout << "\nModified values:\n";
     std::cout << "Company: " << myCar.getCompany() << "\n";
     std::cout << "Model: " << myCar.getModel() << "\n";
