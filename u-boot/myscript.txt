@@ -1,0 +1,11 @@
+setenv numbers "1 2 3 4 5"
+for num in ${numbers};do
+if mmc dev;then
+	fatload mmc 0:1 ${kernel_addr_r} zImage
+	fatload mmc 0:1 ${fdt_addr_r} myfile.dtp
+elif ping 192.168.1.8;then
+	echo "load from network"
+else
+	echo "no option"
+fi 
+done
