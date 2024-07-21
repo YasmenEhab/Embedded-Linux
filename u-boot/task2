@@ -1,0 +1,133 @@
+ 1)sudo mkimage -A arm -T script -n "Bootscript" -C none -d /home/yasmen/boot/myscript.txt /home/yasmen/boot/vxpress-bootscript
+
+Image Name:   Bootscript
+Created:      Sun Jul 21 17:49:46 2024
+Image Type:   ARM Linux Script (uncompressed)
+Data Size:    244 Bytes = 0.24 KiB = 0.00 MiB
+Load Address: 00000000
+Entry Point:  00000000
+Contents:
+Image 0: 236 Bytes = 0.23 KiB = 0.00 MiB
+
+
+2)qemu-system-arm -M vexpress-a9 -m 128M -nographic -kernel u-boot -sd sd.img
+
+
+3)yasmen=>  fatload mmc 0:1 0x60003000 vxpress-bootscript
+308 bytes read in 6 ms (49.8 KiB/s)
+yasmen=>  source 0x60003000
+## Executing script at 60003000
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 6 ms (2 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+
+
+4)yasmen=>  setenv bootcmd "fatload mmc 0:1 0x60003000 vxpress-bootscript; source 0x60003000"
+yasmen=>  saveenv
+Saving Environment to FAT... OK
+
+5)yasmen=>  QEMU: Terminated
+
+
+6)yasmen@Yasmen:~/Desktop/u-boot$ qemu-system-arm -M vexpress-a9 -m 128M -nographic -kernel u-boot -sd sd.img
+WARNING: Image format was not specified for 'sd.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+pulseaudio: set_sink_input_volume() failed
+pulseaudio: Reason: Invalid argument
+pulseaudio: set_sink_input_mute() failed
+pulseaudio: Reason: Invalid argument
+
+
+U-Boot 2022.07 (Jul 21 2024 - 15:11:53 -0400)
+
+DRAM:  128 MiB
+WARNING: Caches not enabled
+Core:  19 devices, 10 uclasses, devicetree: embed
+Flash: 64 MiB
+MMC:   mmci@5000: 0
+Loading Environment from FAT... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@3,02000000
+Hit any key to stop autoboot:  0 
+308 bytes read in 7 ms (43 KiB/s)
+## Executing script at 60003000
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 5 ms (2.9 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 7 ms (2 KiB/s)
+16 bytes read in 8 ms (2 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 6 ms (2 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+switch to partitions #0, OK
+mmc0 is current device
+17 bytes read in 6 ms (2 KiB/s)
+16 bytes read in 5 ms (2.9 KiB/s)
+
+7)yasmen=>  md ${kernel_addr_r}
+60100000: 6c6c6568 7266206f 7a206d6f 65676d69  hello from zimge
+60100010: 0000000a 00000000 00000000 00000000  ................
+60100020: 00000000 00000000 00000000 00000000  ................
+60100030: 00000000 00000000 00000000 00000000  ................
+60100040: 00000000 00000000 00000000 00000000  ................
+60100050: 00000000 00000000 00000000 00000000  ................
+60100060: 00000000 00000000 00000000 00000000  ................
+60100070: 00000000 00000000 00000000 00000000  ................
+60100080: 00000000 00000000 00000000 00000000  ................
+60100090: 00000000 00000000 00000000 00000000  ................
+601000a0: 00000000 00000000 00000000 00000000  ................
+601000b0: 00000000 00000000 00000000 00000000  ................
+601000c0: 00000000 00000000 00000000 00000000  ................
+601000d0: 00000000 00000000 00000000 00000000  ................
+601000e0: 00000000 00000000 00000000 00000000  ................
+601000f0: 00000000 00000000 00000000 00000000  ................
+yasmen=>  md ${fdt_addr_r}   
+60000000: 6c6c6568 7266206f 64206d6f 0a0a7074  hello from dtp..
+60000010: 00000000 00000000 00000000 00000000  ................
+60000020: 00000000 00000000 00000000 00000000  ................
+60000030: 00000000 00000000 00000000 00000000  ................
+60000040: 00000000 00000000 00000000 00000000  ................
+60000050: 00000000 00000000 00000000 00000000  ................
+60000060: 00000000 00000000 00000000 00000000  ................
+60000070: 00000000 00000000 00000000 00000000  ................
+60000080: 00000000 00000000 00000000 00000000  ................
+60000090: 00000000 00000000 00000000 00000000  ................
+600000a0: 00000000 00000000 00000000 00000000  ................
+600000b0: 00000000 00000000 00000000 00000000  ................
+600000c0: 00000000 00000000 00000000 00000000  ................
+600000d0: 00000000 00000000 00000000 00000000  ................
+600000e0: 00000000 00000000 00000000 00000000  ................
+600000f0: 00000000 00000000 00000000 00000000  ................
+
+
+
+
+
