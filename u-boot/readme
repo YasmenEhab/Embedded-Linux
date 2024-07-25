@@ -1,0 +1,2 @@
+task2 : fatload zImage and dtb file through script 
+task1 : fatload zImage and dtb file  manually 
