@@ -58,8 +58,12 @@ open the files and write any message inside them
         Make sure that the script in the same directory of the u-boot
 
         <h1>2- The IP Address of Target (qemu) network interface (NIC) . </h1>
-        yasmen@Yasmen:~/Desktop/u-boot$ sudo qemu-system-arm -M vexpress-a9   -kernel u-boot -                nographic -net nic -net tap,script=./qemu-ifup
+        yasmen@Yasmen:~/Desktop/u-boot$ sudo qemu-system-arm -M vexpress-a9   -kernel u-boot  -sd sd.img -nographic -net nic -net tap,script=./qemu-ifup
 <img src="Screenshot from 2024-07-25 09-05-35.png">
+
+<img src="Screenshot from 2024-07-28 05-59-35.png">
+
+<img src="Screenshot from 2024-07-28 06-00-05.png">
         
         
 
