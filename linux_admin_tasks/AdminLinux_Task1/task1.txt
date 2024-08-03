@@ -1,0 +1,65 @@
+- List three Linux Distributions.
+1) ubuntu 2) fedora  3) debian
+
+- From the slides what is the man command used for?
+provide short reference manuals for individual command , API function , concepts, config file syntaxand is organized in sections
+
+- What is the difference between rm and rmdir using man command
+rm -> Can remove both files and directories 
+rmdir -> Only removes empty directories
+
+
+a- Remove dir11 with rmdir in one-step. What did you notice? And how did you
+overcome that?
+-> rmdir: failed to remove 'dir11': Directory not empty
+-> using rm instesd
+
+b- rmdir: failed to remove 'OldFiles': No such file or directory
+
+c- absolute path : /home/yasmen/docs , relative path : /docs/mycv
+
+- cp /etc/passwd ~/mypasswd
+- mv mypasswd oldpasswd
+
+- You are in /usr/bin, list four ways to go to your home directory
+-> cd ~
+-> cd /home/username
+-> cd $HOME
+
+- List Linux commands in /usr/bin that start with letter w
+->ls /usr/bin/w*
+- /usr/bin/w
+/usr/bin/wakeonlan
+/usr/bin/wall
+/usr/bin/watch
+/usr/bin/whatis
+/usr/bin/whereis
+/usr/bin/who
+/usr/bin/whoami
+/usr/bin/wifi
+/usr/bin/write
+
+- What command type are used for? (from the slide)
+-> display info about comm type
+
+- Show 2 types of command file in /usr/bin that start with letter c
+-> /usr/bin/chfn 
+-> /usr/bin/chage
+
+- Using man command find the command to read file. (Note: man take option)
+-> man -k "readfile"
+-> readfile (3am)       - return the entire contents of a file as a string
+
+-> What is the usage of apropos command
+-> search the manual page descriptions for keywords
+
+
+
+
+
+
+
+
+
+
+
