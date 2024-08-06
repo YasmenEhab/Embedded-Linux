@@ -12,9 +12,9 @@ Once you complete the setup instructions for your machine, you need to get a cop
 3)Initialize the Build Environment: From within the poky directory, run the oe-init-build-env environment setup script to define Yocto Project’s build environment on your build host.
 ```
   source oe-init-build-env 
-
-  4)Start the Build: Continue with the following command to build an OS image for the target, which is core-image-minimal n this example:
 ```
+4)Start the Build: Continue with the following command to build an OS image for the target, which is core-image-minimal n this example:
+
     bitbake --runall=fetch core-image-minimal
     bitbake core-image-minimal -k
     bitbake core-image-minimal -k
