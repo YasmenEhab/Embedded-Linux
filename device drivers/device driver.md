@@ -115,7 +115,36 @@ make -C /lib/modules/6.5.0-45-generic/build M=${PWD} modules
 
 ![image](https://github.com/user-attachments/assets/bf554181-7585-4837-aa31-0087fef7df36)
 
+add module license --> because kernel care (c code of kernel implemented based on GPL ) --> since your module will use linux source code (GPL)
+```
+MODULE_LICENSE("GPL");
+```
+![image](https://github.com/user-attachments/assets/b9847ad3-b393-43d8-b05b-78f5b43605cd)
+![image](https://github.com/user-attachments/assets/6909cbb3-d887-4eef-b0fe-0e922c1e5594)
+
+
+after make --> the output will be --> mydriver.ko --> ko : stands for kernel object 
+```
+insmod mydriver.ko
+```
+kernel space in ram , let's say it's size in the begining was 50 mb , when i included mydriver.ko (its size is 312 kb) , the size of kernel space in ram get extended 
+```
+# Display Kernel Messages
+dmesg
+```
+
+![image](https://github.com/user-attachments/assets/3a7bf6e2-1ba8-4d96-9aaa-5c603b0f97ea)
+
+obj-m --> dynamic
+obj-y --> static --> this is not the only step , there are  other steps required 
+
+why file.ko larger than file.o
+---
+
+implementation proc filesystem
+---
+-> to create file under proc use function --> proc_create()
 
 
 
-
+ 
