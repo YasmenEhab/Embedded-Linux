@@ -152,8 +152,8 @@ implementation proc filesystem
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
 
- ssize_t mywrite (struct file * files, const char __user * buff, size_t, loff_t * loff);
- ssize_t myread (struct file * files, char __user * buff, size_t, loff_t * loff) ;
+ ssize_t mywrite (struct file * files, const char __user * buff, size_t size, loff_t * loff);
+ ssize_t myread (struct file * files, char __user * buff, size_t size, loff_t * loff) ;
 
 struct proc_dir_entry * proc_dir;
 
@@ -164,13 +164,13 @@ struct proc_dir_entry * proc_dir;
     .proc_write = mywrite,
  };
 
- ssize_t mywrite (struct file * files, const char __user * buff, size_t, loff_t * loff)
+ ssize_t mywrite (struct file * files, const char __user * buff, size_t size, loff_t * loff)
  {
     printk("hello from write \n");
     return 0 ;
 
  }
- ssize_t myread (struct file * files, char __user * buff, size_t, loff_t * loff) 
+ ssize_t myread (struct file * files, char __user * buff, size_t size, loff_t * loff) 
 {
 
     printk("hello from read \n");
