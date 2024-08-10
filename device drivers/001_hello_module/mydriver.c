@@ -5,8 +5,8 @@
 #include <linux/fs.h>
 #include <linux/proc_fs.h>
 
- ssize_t mywrite (struct file * files, const char __user * buff, size_t, loff_t * loff);
- ssize_t myread (struct file * files, char __user * buff, size_t, loff_t * loff) ;
+ ssize_t mywrite (struct file * files, const char __user * buff, size_t size, loff_t * loff);
+ ssize_t myread (struct file * files, char __user * buff, size_t size, loff_t * loff) ;
 
 struct proc_dir_entry * proc_dir;
 
@@ -17,13 +17,26 @@ struct proc_dir_entry * proc_dir;
     .proc_write = mywrite,
  };
 
- ssize_t mywrite (struct file * files, const char __user * buff, size_t, loff_t * loff)
+ ssize_t mywrite (struct file * files, const char __user * buff, size_t size, loff_t * loff)
  {
-    printk("hello from write \n");
-    return 0 ;
+   char buffVar[10];
+   /* *buff can't why ? because it is not physical address , it is virtual address*/
+   if(size>10)
+   {
+      printk(" write not ok \n");
+   }
+   else
+   {
+      printk(" write ok \n");
+      (void)copy_from_user(buffVar , buff , size);
+      printk("first byte: %d \n", buffVar[0]);
+
+   }
+   printk("hello from read \n");
+    return 1 ;
 
  }
- ssize_t myread (struct file * files, char __user * buff, size_t, loff_t * loff) 
+ ssize_t myread (struct file * files, char __user * buff, size_t size, loff_t * loff) 
 {
 
     printk("hello from read \n");
