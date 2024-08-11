@@ -4,6 +4,9 @@
 
 ![image](https://github.com/user-attachments/assets/a61e6ab0-dfe3-469b-81b1-298e2fa1f6aa)
 
+```
+sudo dmesg -c
+```
 The sudo dmesg -c command clears the kernel ring buffer and displays its contents. The kernel ring buffer is a log of messages produced by the kernel, such as hardware events, driver messages, and system errors. When you run sudo dmesg -c, it shows the current contents of the buffer and then clears it, so subsequent messages will be logged anew.
 
 Here's what happens with sudo dmesg -c:
