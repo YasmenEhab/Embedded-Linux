@@ -13,10 +13,13 @@ Here's what happens with sudo dmesg -c:
     Displays: The command outputs the existing log messages from the kernel.
     Clears: After displaying, it clears the log buffer, so the next time you run dmesg, it will show an empty buffer until new messages are generated.
 
+
 mydriver.c
+
 ![image](https://github.com/user-attachments/assets/7e138e22-8a27-4446-ac04-8327f0edbd93)
 
 Makefile
+
 ![image](https://github.com/user-attachments/assets/b712196b-344d-4630-860a-3bf9278af7cd)
 ```
 obj-m += mymodule.o
