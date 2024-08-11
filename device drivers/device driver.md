@@ -140,6 +140,8 @@ obj-y --> static --> this is not the only step , there are  other steps required
 
 why file.ko larger than file.o
 ---
+![image](https://github.com/user-attachments/assets/ff4b8155-c811-4a09-99e3-f087d047051a)
+
 
 implementation proc filesystem
 ---
