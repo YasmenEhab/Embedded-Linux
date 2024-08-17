@@ -14,6 +14,14 @@ LICENSE= "MIT" --> Specifies the software license.
 LICENSE_FILES_CHECKSUM
 SRC_URI: Used globally to specify where to fetch the source code.
 
+why use MIT license instead of GPL
+---
+MIT License: The MIT License is very permissive. It allows anyone to do almost anything with your code, including using it in proprietary software. The only requirement is that the original license and copyright notice must be included with any substantial portions of the code.
+
+GPL License: The GPL is a copyleft license, meaning that any derivative work based on GPL-licensed code must also be released under the GPL. This ensures that the code and any derivatives of it remain free and open.
+
+
+
 how to calculate checksum 
 ---
 ```
@@ -61,6 +69,7 @@ bitbake -e recipe_name | grep variable
 in my case 
 ```
 bitbake -e google > expand
+bitbake -e google > /home/yasmen/meta-iti/recipes-example/expand
 ```
 Since the output can be very long, you might want to filter it using tools like grep to find specific variables:
 -e --> expand
@@ -95,8 +104,8 @@ Recipes define a series of tasks that BitBake executes in order to build the sof
     
 all these functions are weak functons
 
-  Creating a Recipe
-  ---
+ Creating a Recipe
+ ---
   Example:
 ```
 SUMMARY = "My Sample Application"
@@ -131,6 +140,24 @@ SRCREV = "720c663c5fd7246b4b42c5205d74db7d9784b5b2"
 
  ![image](https://github.com/user-attachments/assets/74069791-4379-4611-823b-a907a61f2fd9)
 
+i couldn't solve this error so i edited the recipe to be like this and the error got solved 
+
+```
+# header section
+SUMMARY = "my summery"
+DESCRIPTION = "my demo app"
+
+LICENSE ="CLOSED"
+#LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;0835ade698e0bcf8506ecda2f7b4f302"
+
+SRC_URI = "git://github.com/FadyKhalil/DemoApp.git;protocol=https;branch=main"
+
+SRCREV = "720c663c5fd7246b4b42c5205d74db7d9784b5b2"
+ 
+```
+![image](https://github.com/user-attachments/assets/3271a3e4-a380-4224-ad55-bd72ae235556)
+
+
 ```
 bitbake -c cleanall google
 ```
@@ -146,10 +173,47 @@ bitbake -c listtasks google
 
 - Lists All Tasks
 - Displays Task Dependencies
-  
-![image](https://github.com/user-attachments/assets/f8721bbb-a9d9-4a0e-99cb-2bc4284e2c42)
-The function compiles main.c using the C compiler (${CC}) and compiler flags (${CFLAGS}), outputting the resulting binary to ${B}/myapp.
 
-  FILESPATH: variable that defines the search paths where BitBake looks for files that are referenced in a recipe.
-  Search Locations: FILESPATH specifies the directories BitBake searches when trying to locate files referenced by SRC_URI  Custom FILES Variable: You can define or extend FILES to explicitly specify which files and directories should be included in the package. This is particularly useful when you need to package files that are not in the standard locations or when you want to split files across multiple packages.
-  
+![image](https://github.com/user-attachments/assets/21f35cde-786c-4e4b-9441-fba84cc41bfc)
+
+```
+do_compile() {
+    ${CC} ${CFLAGS} -static ${WORKDIR}/main.c -o ${B}/myapp
+}
+
+```
+
+CC: This is the C compiler command (like gcc) set by the build system.
+CFLAGS} These are the compiler flags, which typically include options like optimization levels, warning levels, etc.
+WORKDIR: This variable points to the working directory where your source files (e.g., main.c) are located during the build process.
+B: This variable points to the build directory where the compiled output (myapp) should be placed.  
+The function compiles main.c using the C compiler (CC) and compiler flags (CFLAGS), outputting the resulting binary to ${B}/myapp.
+
+FILESPATH: variable that defines the search paths where BitBake looks for files that are referenced in a     recipe.
+Search Locations: FILESPATH specifies the directories BitBake searches when trying to locate files referenced by SRC_URI  Custom FILES Variable: You can define or extend FILES to explicitly specify which files and directories should be included in the package. This is particularly useful when you need to package files that are not in the standard locations or when you want to split files across multiple packages.
+![image](https://github.com/user-attachments/assets/a0fa7480-4c27-41ec-a843-3c6393039b82)
+![image](https://github.com/user-attachments/assets/269b4557-20db-4206-9994-8ce02b9d5c3e)
+
+THISDIR : variable typically refers to the current directory in a script
+
+
+![image](https://github.com/user-attachments/assets/3d3b457f-c23e-4b04-bf15-992d78f92921)
+
+poky --> meta --> conf --> documentation.conf
+```
+bitbake-getvar -r <recipe> bindir
+
+```
+global varaible always in : local.conf , distro.conf , layer.conf --> don't edit in any local variable in them , cause it will be edited in all recipes 
+if you want to edit in glabal variable -- > use append
+
+task
+---
+- clone repo
+![image](https://github.com/user-attachments/assets/92214060-9b61-4a8a-a5c0-67f2c59a5208)
+
+```
+sudo apt instal cmake
+cmake -S <source_dir> -B <build_dir>
+
+```
