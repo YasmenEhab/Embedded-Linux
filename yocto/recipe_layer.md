@@ -1,3 +1,11 @@
+Variable Assignment Syntax:
+---
+= : Standard assignment, overwriting any previous value.
++=: Appends to the existing value.
+?=: Assigns a value only if the variable is not already set.
+:=: Immediate assignment, used to set the value of a variable immediately, rather than deferring it until later.
+
+
 ```
 source oe-init-build-env
 bitbake-layers create-layer /home/yasmen/meta-iti
