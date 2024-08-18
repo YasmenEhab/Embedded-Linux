@@ -209,11 +209,79 @@ if you want to edit in glabal variable -- > use append
 
 task
 ---
-- clone repo
+CMake
+---
+CMake is a cross-platform build system generator. In brief, it helps manage the build process of software projects by generating build files (like Makefiles or project files for IDEs) for various platforms
+Key Functions of CMake:
+  Configuration:
+  Build System Generation:
+  Dependency Management:
+
+
+Steps to run cmake 
+---
+1- clone repo
+2- Navigate to Your Project Directory
+3- install cmake
+4- Run CMake
+```
+sudo apt-get install cmake
+cmake -S <source_dir> -B <build_dir>
+cmake -S . -B build
+
+```
+
 ![image](https://github.com/user-attachments/assets/92214060-9b61-4a8a-a5c0-67f2c59a5208)
 
-```
-sudo apt instal cmake
-cmake -S <source_dir> -B <build_dir>
+![image](https://github.com/user-attachments/assets/b9858c25-2025-4d0b-b883-535dd7b6240a)
+
+![image](https://github.com/user-attachments/assets/201f0ae7-fa2c-49dd-8646-05c4750a85cd)
+
+in yocto we use " oe_runmake " alternative for " make "
 
 ```
+do_compile() {
+    oe_runmake
+}
+
+```
+```
+
+SUMMARY = "CMake example recipe"
+DESCRIPTION = "Recipe to build a C project using CMake"
+LICENSE = "MIT"
+
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+SRC_URI = "git://github.com/FadyKhalil/DemoApp.git;protocol=https;branch=main"
+
+SRCREV = "720c663c5fd7246b4b42c5205d74db7d9784b5b2"
+
+S = "${WORKDIR}/git"
+
+inherit cmake
+
+# Configure CMake
+do_configure() {
+    cmake -S ${S} -B ${B}
+}
+
+# Compile the project using Make
+do_compile() {
+    oe_runmake -C ${B}
+}
+
+# Install the compiled binaries
+do_install() {
+    # Ensure the destination directory exists
+    mkdir -p ${D}${bindir}
+    
+    # Copy the installed files to the destination directory
+    install -m 0755 ${B}/calculator ${D}${bindir}/
+}
+
+# Optionally, specify additional dependencies
+DEPENDS += "cmake"
+```
+
+![image](https://github.com/user-attachments/assets/baef3f64-5aef-44f2-b2f6-ea3675c7dfc2)
