@@ -81,8 +81,11 @@ DISTRO_FEATURES:append = " systemd"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 VIRTUAL-RUNTIME_initscripts = ""
 
-IMAGE_INSTALL:append = " dropbear systemd-serialgetty"
+IMAGE_INSTALL:append = " dropbear -serialgetty"
 ```
+![image](https://github.com/user-attachments/assets/dc998677-042b-4b73-95f6-d3c3fe1f743b)
+![image](https://github.com/user-attachments/assets/fac85233-7384-48c8-911d-b846d8e34aec)
+
 ![image](https://github.com/user-attachments/assets/0fa5f830-2d8c-45e4-b1cb-e2d06a476428)
 
 DISTRO_FEATURES:append = " systemd"
@@ -117,7 +120,8 @@ systemd: The system and service manager, as specified by the DISTRO_FEATURES and
 systemd-serialgetty: A systemd service that provides a getty (login prompt) on a serial console, which can be useful for accessing the system via a serial port.
 
 ```
-IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg" 
+IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
+ENABLE_UART = "1"
 ```
 The IMAGE_FSTYPES variable in Yocto Project defines the types of filesystem images that will be generated during the build process. Each type corresponds to a specific format for the final output of the image.
 
@@ -128,8 +132,23 @@ ext3 : Suitable for devices that use the ext3 filesystem. This image can be dire
 rpi-sdimg : This is a specialized image format that combines the necessary partitions (boot, root filesystem, etc.) into a single file suitable for writing to an SD card for Raspberry Pi devices.
 
 ```
-ENABLE_UART = "1"
+BB_NUMBER_THREADS ?= "8"
+PARALLEL_MAKE ?= "-j 8"
 ```
+We will also define the multithreading build to fast the image build (as we have done before)
+don't copy and paste first check how many cores and threds do you have and also check Is your CPU support hyperthreading or not
+In my case I have 6 cores and 12 thread then I will use 8 threds to be allocated to the build process
+```
+IMAGE_INSTALL:append = " python3"
+
+IMAGE_INSTALL:append = " openssh"
+
+IMAGE_INSTALL:append = " bash"
+```
+
+OPTIONAL: I need some applications to be on the image when its run (python, ssh, apt, bash, git) if you need them then add these following lines if you don't skip this
+Warning: it will add in space and time while buildiing
+
 build 
 ---
 ```
