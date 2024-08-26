@@ -24,7 +24,23 @@ mkdir yocto
 cd yocto
 git clone -b kirkstone https://git.yoctoproject.org/git/poky
 cd poky
+git clone -b kirkstone https://github.com/agherzan/meta-raspberrypi.git
+git clone -b kirkstone https://github.com/openembedded/meta-openembedded.git
+git clone -b kirkstone https://github.com/meta-qt5/meta-qt5
 source oe-init-build-env
+```
+adding layers
+---
+```
+bitbake-layers add-layer /home/yasmen/yocto/poky/meta-raspberrypi
+bitbake-layers add-layer /home/yasmen/yocto/poky/meta-openembedded/meta-oe
+bitbake-layers add-layer /home/yasmen/yocto/poky/meta-openembedded/meta-python
+bitbake-layers add-layer /home/yasmen/yocto/poky/meta-qt5
+bitbake-layers show-layers
+```
+![image](https://github.com/user-attachments/assets/a7ec10bb-b10f-4668-9973-a4cd7d0bbfe2)
+
+```
 bitbake --runall=fetch core-image-sato
 bitbake -k core-image-sato 
 ```
@@ -37,6 +53,13 @@ bitbake -k core-image-sato
 bitbake to build the core-image-sato image, continuing the build process even if it encounters errors.
 
 The -k option tells bitbake to keep going with the build even if some of the recipes fail. This is useful for identifying and fixing multiple issues in one run, rather than stopping at the first error.
+
+Issue
+---
+While executing the command bitbake --runall=fetch core-image-sato, an error occurred. This issue was triggered due to modifications made to the local.conf file while the fetch process was still running. Editing local.conf during an ongoing BitBake command can lead to inconsistencies and errors, as BitBake relies on the configuration settings in local.conf to manage various aspects of the build process. Changes made to local.conf during this time can cause mismatches in task hashes, configuration errors, and other issues. As a result, the build process encountered errors related to task hashes and dependencies.
+![image](https://github.com/user-attachments/assets/e4849bfb-eb02-4121-ba69-f900e0682d9e)
+
+
 
 ```
 cd conf
@@ -81,7 +104,7 @@ DISTRO_FEATURES:append = " systemd"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 VIRTUAL-RUNTIME_initscripts = ""
 
-IMAGE_INSTALL:append = " dropbear -serialgetty"
+IMAGE_INSTALL:append = " dropbear systemd systemd-serialgetty"
 ```
 ![image](https://github.com/user-attachments/assets/dc998677-042b-4b73-95f6-d3c3fe1f743b)
 ![image](https://github.com/user-attachments/assets/fac85233-7384-48c8-911d-b846d8e34aec)
