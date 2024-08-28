@@ -56,11 +56,28 @@ kernel gives us this function to do this :
 ```
 int alloc_chrdev_region(dev_t *dev, unsigned int firstminor, unsigned int count, const char *name);
 ```
+alloc free memory in ram to be initialized as char device
+
 dev: A pointer to a dev_t variable where the allocated device number will be stored. The dev_t type is used to represent device numbers in the kernel.
 firstminor: The first minor number to allocate. Minor numbers are used to differentiate between multiple devices managed by the same driver.
 count: The number of device numbers to allocate. This is usually set to 1 for a single device.
 name: The name of the device. This is used for informational purposes and is often the name of the module or device.
 1.26
+
+```
+cdev_init()
+```
+initialize cdev data structure for char device
+
+```
+int cdev_add(struct cdev *cdev, dev_t dev, unsigned int count);
+cdev-add (cdev , dev+i ,1)
+```
+The cdev_add function is a Linux kernel function used to add a character device to the system, associates the character device with a specific range of device numbers, allowing the kernel to handle operations on that device.
+
+```
+mknode add
+```
 
 we need to make the driver that defines that device
 ---
