@@ -64,3 +64,5 @@ name: The name of the device. This is used for informational purposes and is oft
 
 we need to make the driver that defines that device
 ---
+
+https://embetronicx.com/tutorials/linux/device-drivers/device-file-creation-for-character-drivers/
