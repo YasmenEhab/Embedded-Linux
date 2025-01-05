@@ -1,3 +1,24 @@
+# Linux Device Driver Types
+Character device
+Block device
+Network device
+
+In Linux, everything is a file. I mean Linux treats everything as a file even hardware.
+
+# 1. Character Device
+A char file is a hardware file that reads/writes data in character by character fashion.
+Some classic examples are keyboard, mouse, and serial printer.
+they can not be mounted.
+
+# 2. Block Device
+A block file is a hardware file that reads/writes data in blocks instead of character by character.
+This type of file is very much useful when we want to write/read data in a bulk fashion. 
+All our disks such are HDD, USB, and CD-ROM are block devices. This is the reason when we are formatting we consider block size. The writing of data is done in an asynchronous fashion, and it is CPU-intensive activity. These device files are used to store data on real hardware and can be mounted so that we can access the data we have written.
+
+# 3. Network Device
+
+A network device is, so far as Linux’s network subsystem is concerned, an entity that sends and receives packets of data. This is normally a physical device such as an Ethernet card. Some network devices though are software only such as the loopback device which is used for sending data to yourself.
+
 ![image](https://github.com/user-attachments/assets/02d2955b-1a8f-4c0d-b1d7-0c5467cfd8cf)
 
 
