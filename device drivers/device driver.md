@@ -1,3 +1,25 @@
+# What is Linux?
+free open-source operating system (OS) based on UNIX 
+
+# Linux Architecture
+![image](https://github.com/user-attachments/assets/99207e0a-a8e4-4624-9f55-22a9fece61a6)
+
+# Kernel Space
+Kernel space is where the kernel  executes and provides its services.
+
+# User Space
+User Space is where the user applications are executed.
+
+# Linux Kernel Modules
+Kernel modules are pieces of code that can be loaded and unloaded into the kernel upon demand. They extend the functionality of the kernel without the need to reboot the system.
+
+# Linux Device Drivers
+A device driver is designed for a specific piece of hardware. The kernel uses it to communicate with that piece of hardware without having to know any details of how the hardware works.
+
+# Difference Between Kernel Drivers and Kernel Modules
+    - A kernel module is a bit of compiled code that can be inserted into the kernel at run-time, such as with insmod or modprobe.
+    - A driver is a bit of code that runs in the kernel to talk to some hardware device. It “drives” the hardware. Almost every bit of hardware in your computer has an 		associated driver.
+
 ```
  uname -r
 ```
